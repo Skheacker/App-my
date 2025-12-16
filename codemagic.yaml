@@ -1,0 +1,22 @@
+workflows:
+  android-apk-aab:
+    name: Android APK & AAB Build
+    max_build_duration: 90
+    instance_type: mac_mini_m1
+
+    environment:
+      flutter: stable
+
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+
+      - name: Build APK (Release)
+        script: flutter build apk --release
+
+      - name: Build AAB (Release)
+        script: flutter build appbundle --release
+
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/bundle/release/app-release.aab
